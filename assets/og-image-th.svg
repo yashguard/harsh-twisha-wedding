@@ -57,7 +57,7 @@
     font-size="200"
     font-weight="600"
     letter-spacing="10"
-    fill="#5C2018">T &amp; H</text>
+    fill="#5C2018">H &amp; T</text>
 
   <!-- Decorative line left -->
   <line x1="200" y1="370" x2="460" y2="370" stroke="#C9A96E" stroke-width="0.8"/>
@@ -73,7 +73,7 @@
     font-size="42"
     font-style="italic"
     font-weight="400"
-    fill="#5C2018">Twisha &amp; Harsh</text>
+    fill="#5C2018">Harsh &amp; Twisha</text>
 
   <!-- Wedding date -->
   <text x="600" y="510"
