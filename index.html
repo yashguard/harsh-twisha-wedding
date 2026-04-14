@@ -35,6 +35,8 @@
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="./assets/favicon-th.svg" />
     <link rel="apple-touch-icon" href="./assets/favicon-th.svg" />
+    <!-- Preload curtain video so it's ready before user taps -->
+    <link rel="preload" as="video" href="./assets/curtain-video-BAKLj3Y5.mp4" type="video/mp4" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
     <link
@@ -735,6 +737,17 @@
         .sonner-loader[data-visible=false] {
             opacity: 0;
             transform: scale(.8) translate(-50%, -50%)
+        }
+
+        /* Curtain intro spinner animation */
+        .curtain-spinner {
+            animation: curtain-spin 0.75s linear infinite;
+        }
+
+        @keyframes curtain-spin {
+            to {
+                transform: rotate(360deg);
+            }
         }
     </style>
 </head>
@@ -1454,6 +1467,26 @@
             </footer>
         </main>
     </div>
+    <script>
+        // Force curtain video to buffer immediately after page load,
+        // before the user taps — so it's ready to play without delay.
+        (function () {
+            var VIDEO_SRC = './assets/curtain-video-BAKLj3Y5.mp4';
+            function primeVideo() {
+                var video = document.querySelector('video[src="' + VIDEO_SRC + '"]');
+                if (!video) return;
+                // If React hydration changed preload to "metadata", restore it
+                if (video.preload !== 'auto') video.preload = 'auto';
+                // Trigger buffering explicitly
+                video.load();
+            }
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', primeVideo);
+            } else {
+                primeVideo();
+            }
+        })();
+    </script>
 </body>
 
 </html>
